@@ -16,7 +16,7 @@ def define_connection():
     return con
 con=define_connection()
 ###############################
-SQL = st.text_area('Write a SQL Query', 'SHOW DATABASES')
+SQL = st.text_input('Write a SQL Query', 'SHOW DATABASES')
 try :
   start = timer()
   df = con.execute(SQL).df() 
