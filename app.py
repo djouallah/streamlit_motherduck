@@ -9,10 +9,10 @@ st.set_page_config(
 col1, col2 = st.columns([3, 1])
 ################################
 #make sure you don't include http into the endpoint
-@st.experimental_singleton
+@st.cache_resource(ttl=5*60)
 def define_view():
     import duckdb
-    con = duckdb.connect(f"md:?token={st.secrets["md_token"]}",read_only=True)
+    con = duckdb.connect(f'''md:?token={st.secrets["md_token"]}''',read_only=True)
     return con
 con=define_view()
 ###############################
