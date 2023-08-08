@@ -14,7 +14,7 @@ import pandas as pd
 def get_data(SQL):
     con = duckdb.connect(f'''md:?token={st.secrets["md_token"]}''',read_only=True)
     try :
-     df = con.sql(SQL).df()
+     df = con.execute(SQL).df()
     except Exception as er:
      df = pd.DataFrame([{'error':er}])    
     return df
