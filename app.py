@@ -8,21 +8,23 @@ st.set_page_config(
                   )
 col1, col2 = st.columns([3, 1])
 ################################
-import duckdb
-import pandas as pd
+
 @st.cache_resource(ttl=5*60)
-def get_data(SQL):
+def define_view():
+    import duckdb
     con = duckdb.connect(f'''md:?token={st.secrets["md_token"]}''',read_only=True)
-    try :
-     df = con.execute(SQL).df()
-    except Exception as er:
-     df = pd.DataFrame([{'error':er}])    
-    return df
+    return con
+con=define_view()
 ###############################
 SQL = st.text_input('Write a SQL Query', 'SHOW DATABASES')
-start = timer()
-df = get_data(SQL) 
-end = timer()
-st.write("Duration in Second")
-st.write(round(end - start,2))
-st.write(df)
+def get_data(SQL):
+  return con.execute(SQL).df()
+try :
+  start = timer()
+  df = get_data(SQL) 
+  end = timer()
+  st.write("Duration in Second")
+  st.write(round(end - start,2))
+  st.write(df)
+except Exception as er:
+ st.write(df = pd.DataFrame([{'error':er}]))
