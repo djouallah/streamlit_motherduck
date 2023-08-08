@@ -10,11 +10,11 @@ col1, col2 = st.columns([3, 1])
 ################################
 
 @st.cache_resource(ttl=5*60)
-def define_view():
+def define_connection():
     import duckdb
     con = duckdb.connect(f'''md:?token={st.secrets["md_token"]}''',read_only=True)
     return con
-con=define_view()
+con=define_connection()
 ###############################
 SQL = st.text_input('Write a SQL Query', 'SHOW DATABASES')
 try :
