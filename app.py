@@ -8,7 +8,7 @@ st.set_page_config(
                   )
 col1, col2 = st.columns([3, 1])
 ################################
-#make sure you don't include http into the endpoint
+
 @st.cache_resource(ttl=5*60)
 def define_view():
     import duckdb
@@ -17,7 +17,6 @@ def define_view():
 con=define_view()
 ###############################
 SQL = st.text_input('Write a SQL Query', 'SHOW DATABASES')
-#@st.experimental_memo (ttl=5*60)
 def get_data(SQL):
   return con.execute(SQL).df()
 try :
