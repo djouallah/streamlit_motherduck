@@ -9,6 +9,7 @@ st.set_page_config(
 col1, col2 = st.columns([3, 1])
 ################################
 import duckdb
+import pandas as pd
 @st.cache_resource(ttl=5*60)
 def get_data(SQL):
     con = duckdb.connect(f'''md:?token={st.secrets["md_token"]}''',read_only=True)
