@@ -9,12 +9,7 @@ st.set_page_config(
                   )
 col1, col2 = st.columns([3, 1])
 ################################
-
-@st.cache_resource(ttl=5*60)
-def define_connection():
-    con = duckdb.connect(f'''md:?token={st.secrets["md_token"]}''',read_only=True)
-    return con
-con=define_connection()
+con = duckdb.connect(f'''md:?token={st.secrets["md_token"]}''',read_only=True)
 ###############################
 SQL = st.text_input('Write a SQL Query', 'SHOW DATABASES')
 try :
@@ -26,3 +21,4 @@ try :
   st.write(df)
 except Exception as er:
  st.write(df = pd.DataFrame([{'error':er}]))
+con.close()
