@@ -15,7 +15,9 @@ def define_connection():
     return con
 con=define_connection()
 ###############################
-SQL = st.text_input('Write a SQL Query', 'SHOW DATABASES')
+st.write('try SHOW DATABASES and SHOW TABLES' )
+SQL = st.text_input('Write a SQL Query', '''use tpch100 ; SELECT   l_returnflag,   l_linestatus,
+SUM(l_quantity) AS sum_qty,   SUM(l_extendedprice) AS sum_base_price FROM   lineitem WHERE   l_shipdate <= '1998-09-02'  GROUP BY all''')
 try :
   start = timer()
   df = con.execute(SQL).df() 
