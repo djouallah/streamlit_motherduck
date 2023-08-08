@@ -19,11 +19,9 @@ def get_data(SQL):
     return df
 ###############################
 SQL = st.text_input('Write a SQL Query', 'SHOW DATABASES')
-  start = timer()
-  df = get_data(SQL) 
-  end = timer()
-  st.write("Duration in Second")
-  st.write(round(end - start,2))
-  st.write(df)
-
- 
+start = timer()
+df = get_data(SQL) 
+end = timer()
+st.write("Duration in Second")
+st.write(round(end - start,2))
+st.write(df)
