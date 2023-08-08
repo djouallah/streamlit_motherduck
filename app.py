@@ -17,11 +17,9 @@ def define_view():
 con=define_view()
 ###############################
 SQL = st.text_input('Write a SQL Query', 'SHOW DATABASES')
-def get_data(SQL):
-  return con.execute(SQL).df()
 try :
   start = timer()
-  df = get_data(SQL) 
+  df = con.execute(SQL).df() 
   end = timer()
   st.write("Duration in Second")
   st.write(round(end - start,2))
