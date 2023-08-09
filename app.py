@@ -23,6 +23,6 @@ try :
   end = timer()
   st.write("Duration in Second")
   st.write(round(end - start,2))
-  st.dataframe(ar,hide_index=True)
+  st.dataframe(ar)
 except Exception as er:
  st.write(er)
