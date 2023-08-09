@@ -1,7 +1,6 @@
 import streamlit as st
 import duckdb
 from timeit import default_timer as timer
-import pandas as pd
 st.set_page_config(
     page_title="Example of using Streamlit with MotherDuck",
     page_icon="✅",
@@ -20,10 +19,10 @@ SQL = st.text_input('Write a SQL Query', '''use tpch100 ; SELECT   l_returnflag,
 SUM(l_quantity) AS sum_qty,   count(*) as nbr_rows FROM   lineitem WHERE   l_shipdate <= '1998-09-02'  GROUP BY all''')
 try :
   start = timer()
-  df = con.execute(SQL).df() 
+  ar = con.execute(SQL).arrow() 
   end = timer()
   st.write("Duration in Second")
   st.write(round(end - start,2))
-  st.dataframe(df)
+  st.dataframe(ar,hide_index=True)
 except Exception as er:
- st.write(df = pd.DataFrame([{'error':er}]))
+ st.write(er)
