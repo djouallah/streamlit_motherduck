@@ -24,6 +24,6 @@ try :
   end = timer()
   st.write("Duration in Second")
   st.write(round(end - start,2))
-  st.write(df)
+  st.dataframe(df)
 except Exception as er:
  st.write(df = pd.DataFrame([{'error':er}]))
