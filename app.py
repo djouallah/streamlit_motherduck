@@ -19,7 +19,7 @@ SQL = st.text_input('Write a SQL Query', '''use tpch100 ; SELECT   l_returnflag,
 SUM(l_quantity) AS sum_qty,   count(*) as nbr_rows FROM   lineitem WHERE   l_shipdate <= '1998-09-02'  GROUP BY all''')
 try :
   start = timer()
-  ar = con.execute(SQL).arrow() 
+  ar = con.execute(SQL).df() 
   end = timer()
   st.write("Duration in Second")
   st.write(round(end - start,2))
